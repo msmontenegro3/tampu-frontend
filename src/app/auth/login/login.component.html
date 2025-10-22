@@ -1,1 +1,42 @@
-<p>login works!</p>
+<section class="flex flex-col justify-center items-center content-center min-h-screen space-y-10">
+
+    <div class="flex flex-col items-center">
+        <h1>Inicia sesión</h1>
+        <p class="font-light text-lg">accede a tus tambos de lectura</p>
+    </div>
+
+    <!-- Formulario -->
+    <form (ngSubmit)="onSubmit()" class=" w-full max-w-md space-y-5">
+        <div>
+            <label> Email
+                <input [(ngModel)]="email" class="input-shortanswer" type="email" name="email" required
+                    placeholder="ej: correo@correo.com">
+            </label>
+            <small class="text-red-600">Texto ayuda</small>
+        </div>
+
+        <div>
+            <label>Contraseña
+                <input [(ngModel)]="password" class="input-shortanswer" type="password" name="password" required
+                    placeholder="Escriba su contraseña">
+            </label>
+            <small class="text-red-600">Texto ayuda</small>
+        </div>
+
+        <button type="submit" [disabled]="loading" class="primary-btn block mx-auto">
+            {{loading ? 'Iniciando sesión' : 'Iniciar sesión'}}
+        </button>
+    </form>
+
+    <!-- Error -->
+    <p *ngIf="errorMessage" class="text-red-500">
+        {{ errorMessage }}
+    </p>
+
+    <!-- Registro -->
+    <p class="text-center text-gray-600">
+        ¿No tienes una cuenta?
+        <a routerLink="/register" class="text-blue-500 hover:underline cursor-pointer">Regístrate</a>
+    </p>
+
+</section>
