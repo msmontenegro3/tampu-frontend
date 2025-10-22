@@ -6,32 +6,50 @@
     </div>
 
     <!-- Formulario -->
-    <form (ngSubmit)="onSubmit()" class=" w-full max-w-md space-y-5">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class=" w-full max-w-md space-y-5">
         <div>
             <label> Email
-                <input [(ngModel)]="email" class="input-shortanswer" type="email" name="email" required
+                <input formControlName="email" class="input-shortanswer" type="email"
                     placeholder="ej: correo@correo.com">
             </label>
-            <small class="text-red-600">Texto ayuda</small>
+            <small class="text-red-600" *ngIf="email?.touched && email?.invalid">
+                <ng-container *ngIf="email?.errors?.['required']">
+                    El correo es obligatorio
+                </ng-container>
+                <ng-container *ngIf="email?.errors?.['email']">
+                    Formato inválido
+                </ng-container>
+            </small>
         </div>
 
         <div>
             <label>Contraseña
-                <input [(ngModel)]="password" class="input-shortanswer" type="password" name="password" required
+                <input formControlName="password" class="input-shortanswer" type="password" name="password" required
                     placeholder="Escriba su contraseña">
             </label>
-            <small class="text-red-600">Texto ayuda</small>
+            <small class="text-red-600" *ngIf="password?.touched && password?.invalid">
+                <ng-container *ngIf="password?.errors?.['required']">
+                    La contraseña es obligatoria
+                </ng-container>
+                <ng-container *ngIf="password?.errors?.['minlength']">
+                    Debe tener al menos 4 caracteres
+                </ng-container>
+                <ng-container *ngIf="password?.errors?.['pattern']">
+                    Debe incluir al menos un símbolo
+                </ng-container>
+            </small>
         </div>
 
-        <button type="submit" [disabled]="loading" class="primary-btn block mx-auto">
+        <button type="submit" [disabled]="!loginForm.valid || loading" class="primary-btn block mx-auto">
             {{loading ? 'Iniciando sesión' : 'Iniciar sesión'}}
         </button>
+        <!-- Error -->
+        <p *ngIf="errorMessage" class="text-red-500 text-center">
+            Credenciales incorrectas
+        </p>
     </form>
 
-    <!-- Error -->
-    <p *ngIf="errorMessage" class="text-red-500">
-        {{ errorMessage }}
-    </p>
+
 
     <!-- Registro -->
     <p class="text-center text-gray-600">
