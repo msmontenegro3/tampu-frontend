@@ -1,1 +1,110 @@
-<p>register works!</p>
+<section class="flex flex-col justify-center items-center content-center min-h-screen space-y-10">
+
+    <div class="flex flex-col items-center">
+        <h1>Crea tu cuenta</h1>
+        <p class="font-light text-lg">Descubre varios tambos de lectura</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="w-full max-w-md space-y-5">
+        <!-- Nombre -->
+        <div>
+            <label>Nombre
+                <input type="text" class="input-shortanswer" formControlName="nombre"
+                    placeholder="Escribe tu nombre completo">
+            </label>
+            <small class="text-red-600" *ngIf="nombre?.touched && nombre?.invalid">
+                <ng-container *ngIf="nombre?.errors?.['required']">
+                    El nombre es obligatorio
+                </ng-container>
+                <ng-container *ngIf="nombre?.errors?.['minlength']">
+                    El nombre debe tener al menos 3 caracteres
+                </ng-container>
+            </small>
+        </div>
+
+        <!-- Email -->
+        <div>
+            <label> Email
+                <input formControlName="email" class="input-shortanswer" type="email"
+                    placeholder="ej: correo@correo.com">
+            </label>
+            <small class="text-red-600" *ngIf="email?.touched && email?.invalid">
+                <ng-container *ngIf="email?.errors?.['required']">
+                    El correo es obligatorio
+                </ng-container>
+                <ng-container *ngIf="email?.errors?.['email']">
+                    Formato inválido
+                </ng-container>
+            </small>
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+            <label>Contraseña
+                <input class="input-shortanswer" type="password" formControlName="password"
+                    placeholder="Escribe una contraseña segura" />
+            </label>
+            <small class="text-red-600" *ngIf="password?.touched && password?.invalid">
+                <ng-container *ngIf="password?.errors?.['required']">
+                    La contraseña es obligatoria.
+                </ng-container>
+                <ng-container *ngIf="password?.errors?.['minlength']">
+                    Debe tener al menos 4 caracteres.
+                </ng-container>
+                <ng-container *ngIf="password?.errors?.['pattern']">
+                    Debe incluir al menos un símbolo
+                </ng-container>
+            </small>
+        </div>
+
+        <!-- Confirmar contraseña -->
+        <div>
+            <label> Confirma tu contraseña
+                <input type="password" class="input-shortanswer" formControlName="confirmPassword"
+                    placeholder="Repite la contraseña">
+            </label>
+            <small class="text-red-600" *ngIf="confirmPassword?.touched && registerForm?.errors?.['passwordsMismatch']">
+                Las contraseñas deben coincidir
+            </small>
+        </div>
+
+        <!-- Rol -->
+
+        <div>
+            <label>Selecciona tu rol</label>
+            <div class="flex justify-center gap-2 mt-2">
+                <label
+                    class="bg-gray-100 w-full rounded-full text-center px-4 py-2 cursor-pointer has-[input:checked]:bg-gray-500 has-[input:checked]:text-white  transition-all hover:bg-gray-300">
+                    <input type="radio" formControlName="rol" value="estudiante" class="hidden peer">
+                    Soy estudiante
+                </label>
+
+                <label
+                    class="w-full bg-gray-100 rounded-full text-center px-4 py-2 cursor-pointer has-[input:checked]:bg-gray-500 has-[input:checked]:text-white transition-all hover:bg-gray-300">
+                    <input type="radio" formControlName="rol" value="docente" class="hidden peer">
+                    Soy docente
+                </label>
+            </div>
+        </div>
+
+        <!-- Boton -->
+
+        <button type="submit" [disabled]="!registerForm.valid || loading" class="primary-btn block mx-auto !mt-8">
+            {{loading ? 'Registrando...' : 'Registrar mi cuenta'}}
+        </button>
+
+    </form>
+
+    <!-- MENSAJES GLOBALES -->
+    <p *ngIf="successMessage" class="text-green-600 font-medium">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="text-red-500">{{ errorMessage }}</p>
+
+    <!-- VOLVER -->
+    <p class="text-center text-gray-600">
+        ¿Ya tienes una cuenta?
+        <a routerLink="/login" class="text-blue-500 hover:underline cursor-pointer">
+            Inicia sesión
+        </a>
+    </p>
+
+</section>
