@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiURL = 'http://localhost:3000/auth'; //backend nestjs
+  private apiURL = `${environment.apiUrl}/auth`; //backend nestjs
   constructor(private http: HttpClient) {}
 
   register(data: any): Observable<any> {
