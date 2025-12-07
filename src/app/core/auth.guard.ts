@@ -6,7 +6,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const auth = inject(AuthService);
   const router = inject(Router);
 
-  console.log('Guard evaluando:', route.routeConfig?.path);
+  //console.log('Guard evaluando:', route.routeConfig?.path);
 
   const token = auth.getToken();
 
@@ -18,7 +18,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
-    console.log('✅ Token payload:', payload);
+    //console.log('Token payload:', payload);
     const rolRequerido = route.data?.['rol'];
 
     if (rolRequerido && payload.rol !== rolRequerido) {
@@ -32,6 +32,6 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  console.log('✅ Acceso permitido a:', route.routeConfig?.path);
+  //console.log('Acceso permitido a:', route.routeConfig?.path);
   return true;
 };

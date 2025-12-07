@@ -1,0 +1,39 @@
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+        <nav>
+            <ul>
+                <li routerLink="/dashboard/home" routerLinkActive="active">
+                    Inicio
+                </li>
+
+                <li *ngIf="role === 'docente'" routerLink="/dashboard/my-events">
+                    Mis eventos
+                </li>
+
+                <li *ngIf="role === 'estudiante'" routerLink="/dashboard/my-enrollments">
+                    Mis inscripciones
+                </li>
+
+                <li *ngIf="role === 'docente'" routerLink="/dashboard/attendance">
+                    Asistencia
+                </li>
+
+                <li routerLink="/dashboard/profile">
+                    Perfil
+                </li>
+            </ul>
+        </nav>
+
+        <button *ngIf="role === 'docente'" routerLink="/dashboard/my-events">
+            Crear evento
+        </button>
+
+        <button routerLink="/login" (click)="logout()">Cerrar sesión</button>
+    </aside>
+
+    <main class="content">
+        <router-outlet></router-outlet>
+    </main>
+
+</div>

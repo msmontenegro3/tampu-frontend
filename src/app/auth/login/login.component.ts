@@ -54,13 +54,7 @@ export class LoginComponent {
         // Identifica el rol
         const payload = JSON.parse(atob(res.access_token.split('.')[1]));
 
-        if (payload.rol === 'docente') {
-          this.router.navigate(['/teacher']);
-          console.log('dirigiendo al docente');
-        } else {
-          this.router.navigate(['/student']);
-          console.log('dirigiendo al estudiante');
-        }
+        this.router.navigate(['/dashboard']);
       },
 
       error: (err) => {

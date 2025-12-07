@@ -1,0 +1,35 @@
+<h1>Tambos publicados</h1>
+
+<div *ngIf="loading">
+    <p>Cargando eventos...</p>
+</div>
+
+<article *ngFor="let e of events">
+
+    <!-- Image placeholder -->
+    <!-- <div class="card-img">
+        <img src="" alt="">
+    </div> -->
+
+    <div class="card">
+        <p>{{e.date}}</p>
+        <h2>{{e.title}}</h2>
+        <p>{{e.description}}</p>
+
+        <button [routerLink]="['/dashboard/events', e.id]">
+            Ver detalles
+        </button>
+        <button *ngIf="isOwner(e)">
+            Editar
+        </button>
+        <button *ngIf="isStudent()">
+            Inscribirme
+        </button>
+    </div>
+
+    <!-- Si no existen tambos -->
+    <div>
+        <p>Todavía no se han publicado tambos</p>
+    </div>
+
+</article>
