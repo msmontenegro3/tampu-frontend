@@ -11,7 +11,7 @@
         <img src="" alt="">
     </div> -->
 
-    <div class="card">
+    <div class="">
         <p>{{e.date}}</p>
         <h2>{{e.title}}</h2>
         <p>{{e.description}}</p>
@@ -22,13 +22,13 @@
         <button *ngIf="isOwner(e)">
             Editar
         </button>
-        <button *ngIf="isStudent()">
-            Inscribirme
+        <button *ngIf="isStudent()" [disabled]="isPast(e.date)" (click)="toggleEnrollment(e)">
+            {{isEnrolled(e.id) ? 'Desinscribirme' : 'Inscribirme'}}
         </button>
     </div>
 
     <!-- Si no existen tambos -->
-    <div>
+    <div *ngIf="!events">
         <p>Todavía no se han publicado tambos</p>
     </div>
 

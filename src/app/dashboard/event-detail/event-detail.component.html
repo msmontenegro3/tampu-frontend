@@ -1,1 +1,35 @@
-<p>event-detail works!</p>
+<div *ngIf="loading">
+    Cargando evento...
+</div>
+
+<div *ngIf="error">
+    {{error}}
+</div>
+
+<article *ngIf="event">
+
+    <h1>{{event.title}}</h1>
+
+    <p> Fecha: {{event.date}} </p>
+    <p> Hora: {{event.time}} </p>
+    <p> Lugar: {{event.location}} </p>
+
+    <p>{{event.description}}</p>
+
+    <p>
+        Docente: {{event.teacher.nombre}} | {{event.teacher.email}}
+    </p>
+
+    <div>
+        <!-- Estudiante -->
+        <button *ngIf="isStudent()" [disabled]="isPast(event.date)" (click)="toggleEnrollment()">
+            {{ isEnrolled() ? 'Desinscribirme' : 'Inscribirme'}}
+        </button>
+
+        <!-- Docente -->
+        <button *ngIf="isOwner()">
+            Editar evento
+        </button>
+    </div>
+
+</article>

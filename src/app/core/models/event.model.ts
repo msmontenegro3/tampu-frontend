@@ -13,4 +13,6 @@ export interface Event {
   time: string;
   location: string;
   teacher: User;
+
+  enrolled?: boolean;
 }
