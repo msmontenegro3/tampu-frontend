@@ -6,6 +6,7 @@ import { AuthHelperService } from '../../core/auth-helper.service';
 import { CommonModule } from '@angular/common';
 import { EnrollmentsService } from '../../core/enrollments.service';
 import { EnrollmentStateService } from '../../core/enrollment-state.service';
+import { Observable, take } from 'rxjs';
 
 @Component({
   selector: 'app-event-detail',
@@ -18,6 +19,8 @@ export class EventDetailComponent implements OnInit {
   event: Event | null = null;
   loading = false;
   error: string | null = null;
+
+  isEnrolled$!: Observable<boolean>;
 
   currentUserId: number | null = null;
   currentUserRole: string | null = null;
@@ -47,6 +50,8 @@ export class EventDetailComponent implements OnInit {
     this.eventsService.getEventById(id).subscribe({
       next: (event) => {
         this.event = event;
+
+        this.isEnrolled$ = this.enrollmentState.isEnrolled$(event.id);
         this.loading = false;
       },
       error: () => {
@@ -72,31 +77,29 @@ export class EventDetailComponent implements OnInit {
     return date < today;
   }
 
-  isEnrolled(): boolean {
-    return this.event ? this.enrollmentState.isEnrolled(this.event.id) : false;
-  }
-
   toggleEnrollment(): void {
     if (!this.event) return;
 
     const eventId = this.event.id;
 
-    if (this.enrollmentState.isEnrolled(eventId)) {
-      this.enrollmentsService.unenroll(eventId).subscribe({
-        next: () => this.enrollmentState.remove(eventId),
-        error: () => alert('No se pudo desinscribir'),
+    this.enrollmentState
+      .isEnrolled$(eventId)
+      .pipe(take(1))
+      .subscribe((enrolled) => {
+        if (enrolled) {
+          this.enrollmentsService.unenroll(eventId).subscribe({
+            next: () => this.enrollmentState.remove(eventId),
+            error: () => alert('No se pudo desinscribir'),
+          });
+        } else {
+          this.enrollmentsService.enroll(eventId).subscribe({
+            next: () => this.enrollmentState.add(eventId),
+            error: (err) => {
+              if (err.status === 409) alert(err.error.message);
+              else alert('Error al inscribirse');
+            },
+          });
+        }
       });
-    } else {
-      this.enrollmentsService.enroll(eventId).subscribe({
-        next: () => this.enrollmentState.add(eventId),
-        error: (err) => {
-          if (err.status === 409) {
-            alert(err.error.message);
-          } else {
-            alert('Error al inscribirse');
-          }
-        },
-      });
-    }
   }
 }

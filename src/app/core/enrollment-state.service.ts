@@ -1,33 +1,39 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EnrollmentStateService {
-  private enrolledIdsSubject = new BehaviorSubject<Set<string>>(new Set());
-  enrolledIds$ = this.enrolledIdsSubject.asObservable();
+  private enrolledIds$ = new BehaviorSubject<Set<string>>(new Set());
+
+  // Observable
+  readonly enrolled$ = this.enrolledIds$.asObservable();
 
   // Inicializar estado
   set(ids: string[]) {
-    this.enrolledIdsSubject.next(new Set(ids));
-  }
-
-  // Lectura
-  isEnrolled(eventId: string): boolean {
-    return this.enrolledIdsSubject.value.has(eventId);
+    this.enrolledIds$.next(new Set(ids));
   }
 
   // Actualizacion
   add(eventId: string) {
-    const copy = new Set(this.enrolledIdsSubject.value);
+    const copy = new Set(this.enrolledIds$.value);
     copy.add(eventId);
-    this.enrolledIdsSubject.next(copy);
+    this.enrolledIds$.next(copy);
   }
 
   remove(eventId: string) {
-    const copy = new Set(this.enrolledIdsSubject.value);
+    const copy = new Set(this.enrolledIds$.value);
     copy.delete(eventId);
-    this.enrolledIdsSubject.next(copy);
+    this.enrolledIds$.next(copy);
+  }
+
+  // Lectura
+  isEnrolled$(eventId: string) {
+    return this.enrolled$.pipe(map((set) => set.has(eventId)));
+  }
+
+  isEnrolledSync$(eventId: string): boolean {
+    return this.enrolledIds$.value.has(eventId);
   }
 }

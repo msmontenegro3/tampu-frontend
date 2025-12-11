@@ -68,8 +68,8 @@ export class HomeComponent implements OnInit {
     return this.currentUserRole === 'estudiante';
   }
 
-  isEnrolled(eventId: string): boolean {
-    return this.enrollmentState.isEnrolled(eventId);
+  isEnrolled$(eventId: string) {
+    return this.enrollmentState.isEnrolled$(eventId);
   }
 
   isPast(date: string): boolean {
@@ -90,16 +90,19 @@ export class HomeComponent implements OnInit {
   }
 
   toggleEnrollment(event: Event): void {
-    if (this.enrollmentState.isEnrolled(event.id)) {
-      this.enrollmentsService.unenroll(event.id).subscribe({
-        next: () => this.enrollmentState.remove(event.id),
+    const eventId = event.id;
+
+    const currentlyEnrolled = this.enrollmentState.isEnrolledSync$(eventId);
+
+    if (currentlyEnrolled) {
+      this.enrollmentsService.unenroll(eventId).subscribe({
+        next: () => this.enrollmentState.remove(eventId),
+        error: () => console.error('Error al desinscribirse'),
       });
     } else {
-      this.enrollmentsService.enroll(event.id).subscribe({
-        next: () => this.enrollmentState.add(event.id),
-        error: (err) => {
-          console.error('Error al inscribirse', err);
-        },
+      this.enrollmentsService.enroll(eventId).subscribe({
+        next: () => this.enrollmentState.add(eventId),
+        error: (err) => console.error('Error al inscribirse', err),
       });
     }
   }

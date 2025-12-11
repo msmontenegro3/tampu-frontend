@@ -23,7 +23,7 @@
     <div>
         <!-- Estudiante -->
         <button *ngIf="isStudent()" [disabled]="isPast(event.date)" (click)="toggleEnrollment()">
-            {{ isEnrolled() ? 'Desinscribirme' : 'Inscribirme'}}
+            {{ (isEnrolled$ | async) ? 'Desinscribirme' : 'Inscribirme'}}
         </button>
 
         <!-- Docente -->
