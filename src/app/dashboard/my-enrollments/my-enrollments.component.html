@@ -1,1 +1,24 @@
-<p>my-enrollments works!</p>
+<h1>Mis inscripciones</h1>
+
+<div *ngIf="loading">
+    <p>Cargando</p>
+</div>
+
+<div *ngIf="events.length === 0 && !loading">
+    <p>No tienes inscripciones todavía</p>
+</div>
+
+<article *ngFor="let e of events">
+
+    <p>{{e.date}}</p>
+    <h2>{{e.title}}</h2>
+    <p>{{e.description}}</p>
+
+    <button [routerLink]="['/dashboard/events', e.id]">
+        Ver detalles
+    </button>
+
+    <button (click)="toggleEnrollment(e)">
+        {{ (isEnrolled$(e.id) | async) ? 'Desinscribirme' : 'Inscribirme' }}
+    </button>
+</article>
