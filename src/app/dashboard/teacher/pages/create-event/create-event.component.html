@@ -1,0 +1,37 @@
+<h1>Crear nuevo Tambo</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <label>
+        Título
+        <input type="text" formControlName="title">
+    </label>
+
+    <label>
+        Descripción
+        <textarea formControlName="description"></textarea>
+    </label>
+
+    <label>
+        Fecha
+        <input type="date" formControlName="date">
+    </label>
+
+    <label>
+        Hora
+        <input type="time" formControlName="time">
+    </label>
+
+    <label>
+        Lugar
+        <input type="text" formControlName="location">
+    </label>
+
+    <button type="submit" [disabled]="form.invalid" class="primary-btn block mx-auto">
+        Publicar tambo
+    </button>
+
+</form>
+
+<p *ngIf="loading">Guardando...</p>
+<p *ngIf="error">{{ error }}</p>

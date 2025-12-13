@@ -21,6 +21,15 @@ export const DASHBOARD_ROUTES: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'events/:id', component: EventDetailComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: 'teacher/create',
+        loadComponent: () =>
+          import('./teacher/pages/create-event/create-event.component').then(
+            (m) => m.CreateEventComponent
+          ),
+        canActivate: [authGuard],
+        data: { rol: 'docente' },
+      },
     ],
   },
 ];

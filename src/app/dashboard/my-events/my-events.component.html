@@ -1,1 +1,14 @@
-<p>my-events works!</p>
+<h1>Mis tambos publicados</h1>
+
+<div *ngIf="loading">Cargando...</div>
+<p *ngIf="error">{{error}}</p>
+
+
+<article *ngFor="let e of events">
+    <p>{{ e.date }}</p>
+    <h2>{{ e.title }}</h2>
+    <p>{{ e.description }}</p>
+
+    <button [routerLink]="['/dashboard/events', e.id]">Ver detalles</button>
+    <button [routerLink]="['/dashboard/events', e.id, 'edit']">Editar</button>
+</article>

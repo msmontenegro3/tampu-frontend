@@ -18,4 +18,8 @@ export class EventsService {
   getEventById(id: string) {
     return this.http.get<Event>(`${this.apiURL}/${id}`);
   }
+
+  createEvent(data: any) {
+    return this.http.post(`${this.apiURL}`, data);
+  }
 }
