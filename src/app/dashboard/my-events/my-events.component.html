@@ -6,9 +6,10 @@
 
 <article *ngFor="let e of events">
     <p>{{ e.date }}</p>
+    <p>{{e.location}}</p>
     <h2>{{ e.title }}</h2>
     <p>{{ e.description }}</p>
 
     <button [routerLink]="['/dashboard/events', e.id]">Ver detalles</button>
-    <button [routerLink]="['/dashboard/events', e.id, 'edit']">Editar</button>
+    <button [routerLink]="['/dashboard/teacher/edit-event', e.id]">Editar</button>
 </article>

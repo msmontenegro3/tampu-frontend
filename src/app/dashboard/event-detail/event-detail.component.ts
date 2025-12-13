@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from '../../core/models/event.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EventsService } from '../../core/events.service';
 import { AuthHelperService } from '../../core/auth-helper.service';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { Observable, take } from 'rxjs';
 @Component({
   selector: 'app-event-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './event-detail.component.html',
   styleUrl: './event-detail.component.css',
 })

@@ -27,7 +27,7 @@
         </button>
 
         <!-- Docente -->
-        <button *ngIf="isOwner()">
+        <button *ngIf="isOwner()" [routerLink]="['/dashboard/teacher/edit-event', event.id]">
             Editar evento
         </button>
     </div>

@@ -22,4 +22,12 @@ export class EventsService {
   createEvent(data: any) {
     return this.http.post(`${this.apiURL}`, data);
   }
+
+  updateEvent(id: string, data: any) {
+    return this.http.patch<Event>(`${this.apiURL}/${id}`, data);
+  }
+
+  deleteEvent(id: string) {
+    return this.http.delete(`${this.apiURL}/${id}`);
+  }
 }

@@ -13,13 +13,14 @@
 
     <div class="">
         <p>{{e.date}}</p>
+        <p>{{e.location}}</p>
         <h2>{{e.title}}</h2>
         <p>{{e.description}}</p>
 
         <button [routerLink]="['/dashboard/events', e.id]">
             Ver detalles
         </button>
-        <button *ngIf="isOwner(e)">
+        <button *ngIf="isOwner(e)" [routerLink]="['/dashboard/teacher/edit-event', e.id]">
             Editar
         </button>
         <button *ngIf="isStudent()" [disabled]="isPast(e.date)" (click)="toggleEnrollment(e)">

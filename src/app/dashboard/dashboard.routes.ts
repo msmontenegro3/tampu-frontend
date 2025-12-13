@@ -30,6 +30,15 @@ export const DASHBOARD_ROUTES: Routes = [
         canActivate: [authGuard],
         data: { rol: 'docente' },
       },
+      {
+        path: 'teacher/edit-event/:id',
+        loadComponent: () =>
+          import('./teacher/pages/edit-event/edit-event.component').then(
+            (m) => m.EditEventComponent
+          ),
+        canActivate: [authGuard],
+        data: { rol: 'docente' },
+      },
     ],
   },
 ];

@@ -1,0 +1,29 @@
+<h1>Editar tambo</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <label>Título</label>
+    <input type="text" formControlName="title" />
+
+    <label>Descripción</label>
+    <textarea rows="3" formControlName="description"></textarea>
+
+    <label>Fecha</label>
+    <input type="date" formControlName="date" />
+
+    <label>Hora</label>
+    <input type="time" formControlName="time" />
+
+    <label>Lugar</label>
+    <input type="text" formControlName="location" />
+
+    <button type="submit" [disabled]="form.invalid || loading" class="primary-btn block mx-auto">
+        {{ loading ? 'Actualizando...' : 'Actualizar tambo' }}
+    </button>
+
+    <button type="button" [disabled]="deleting" (click)="onDelete()" class="primary-btn block mx-auto">
+        {{ deleting ? 'Eliminando...' : 'Eliminar tambo' }}
+    </button>
+</form>
+
+<p *ngIf="error" style="color:red">{{ error }}</p>
