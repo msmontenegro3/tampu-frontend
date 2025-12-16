@@ -1,1 +1,17 @@
-<p>attendance works!</p>
+<h1>Registro de asistencia</h1>
+
+<div *ngIf="loading">Cargando eventos...</div>
+
+<div *ngIf="!loading && events.length === 0">
+    <p>No tienes tambos creados.</p>
+</div>
+
+<section *ngFor="let e of events">
+    <h2>{{ e.title }}</h2>
+    <p> {{ e.date }} - {{ e.time }} </p>
+    <p> {{ e.description }} </p>
+
+    <button (click)="goToEvent(e.id)">
+        Registrar asistencia
+    </button>
+</section>

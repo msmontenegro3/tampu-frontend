@@ -27,4 +27,8 @@ export class EnrollmentsService {
       `${this.apiURL}/event/${eventId}/is-enrolled`
     );
   }
+
+  getByEvent(eventId: string) {
+    return this.http.get<any[]>(`${this.apiURL}/by-event/${eventId}`);
+  }
 }

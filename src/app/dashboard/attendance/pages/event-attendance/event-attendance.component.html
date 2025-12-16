@@ -1,0 +1,20 @@
+<h1>Registrar asistencia</h1>
+
+<table *ngIf="students.length > 0">
+    <tr>
+        <th>Estudiante</th>
+        <th>Asistencia</th>
+    </tr>
+
+    <tr *ngFor="let s of students">
+        <td>
+            <input type="checkbox" [checked]="isPresent(s.id)" (change)="toggle(s.id)" />
+        </td>
+
+        <td>{{ s.nombre }}</td>
+    </tr>
+</table>
+
+<div *ngIf="students.length === 0 && !loading">
+    No hay estudiantes inscritos.
+</div>
