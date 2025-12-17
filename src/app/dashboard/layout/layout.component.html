@@ -1,36 +1,74 @@
-<div class="grid grid-cols-1 md:grid-cols-[250px_1fr] min-h-screen">
+<div class="min-h-screen bg-gray-100 flex flex-col md:flex-row">
 
-    <aside class="bg-white shadow-lg p-4 hidden md:block">
+    <div class="bg-primaryblue text-white p-4 shadow flex items-center md:hidden">
+        <button (click)="toggleMobileMenu()" class="text-gray-300 hover:text-white focus:outline-none">
+            <fa-icon [icon]="hamburguesaIcon" size="lg"></fa-icon>
+            <span class="font-bold text-xl ml-2">Menú</span>
+        </button>
+
+    </div>
+
+    <aside
+        class="bg-primaryblue text-white shadow-lg w-64 flex flex-col justify-between pt-5 pb-5 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out z-50"
+        [ngClass]="{'translate-x-0': isMobileMenuOpen}">
+
         <nav>
-            <ul>
-                <li routerLink="/dashboard/home" routerLinkActive="active">
-                    Inicio
+            <ul class="space-y-3 uppercase">
+                <li class="pl-10 text-lg hover:cursor-pointer transition-colors p-3 hover:bg-white hover:text-primaryblue"
+                    routerLink="/dashboard/home" routerLinkActive="bg-white text-primaryblue font-bold">
+                    <fa-icon [icon]="houseIcon"></fa-icon> Inicio
                 </li>
 
-                <li *ngIf="role === 'docente'" routerLink="/dashboard/my-events">
-                    Mis eventos
+                <li *ngIf="role === 'docente'"
+                    class="pl-10 text-lg hover:cursor-pointer transition-colors p-3 hover:bg-white hover:text-primaryblue"
+                    routerLink="/dashboard/my-events" routerLinkActive="bg-white text-primaryblue font-bold">
+
+                    <fa-icon [icon]="calendarIcon"></fa-icon> Mis eventos
                 </li>
 
-                <li *ngIf="role === 'estudiante'" routerLink="/dashboard/my-enrollments">
-                    Mis inscripciones
+                <li *ngIf="role === 'estudiante'"
+                    class="pl-10 text-lg hover:cursor-pointer transition-colors p-3 hover:bg-white hover:text-primaryblue"
+                    routerLink="/dashboard/my-enrollments" routerLinkActive="bg-white text-primaryblue font-bold">
+
+                    <fa-icon [icon]="calendarIcon"></fa-icon> Mis inscripciones
                 </li>
 
-                <li *ngIf="role === 'docente'" routerLink="/dashboard/attendance">
-                    Asistencia
+                <li *ngIf="role === 'estudiante'"
+                    class="pl-10 text-lg hover:cursor-pointer transition-colors p-3 hover:bg-white hover:text-primaryblue"
+                    routerLinkActive="bg-white text-primaryblue font-bold">
+
+                    <fa-icon [icon]="progressIcon"></fa-icon> Mi progreso
                 </li>
 
-                <li routerLink="/dashboard/profile">
-                    Perfil
+                <li *ngIf="role === 'docente'"
+                    class="pl-10 text-lg hover:cursor-pointer transition-colors p-3 hover:bg-white hover:text-primaryblue"
+                    routerLink="/dashboard/attendance" routerLinkActive="bg-white text-primaryblue font-bold">
+
+                    <fa-icon [icon]="listCheckIcon"></fa-icon> Asistencia
+                </li>
+
+                <li routerLink="/dashboard/profile"
+                    class="pl-10 text-lg hover:cursor-pointer transition-colors p-3 hover:bg-white hover:text-primaryblue"
+                    routerLinkActive="bg-white text-primaryblue font-bold">
+
+                    <fa-icon [icon]="userIcon"></fa-icon> Perfil
                 </li>
             </ul>
         </nav>
 
-        <button *ngIf="role === 'docente'" routerLink="/dashboard/teacher/create">
-            Crear evento
-        </button>
+        <div class="flex flex-col items-center space-y-2 px-4">
+            <button class="secondary-btn px-10" *ngIf="role === 'docente'" routerLink="/dashboard/teacher/create">
+                Crear evento
+            </button>
 
-        <button routerLink="/login" (click)="logout()">Cerrar sesión</button>
+            <button class="primary-btn bg-lighterBlue px-10" routerLink="/login" (click)="logout()">Cerrar
+                sesión</button>
+        </div>
+
     </aside>
+
+    <div *ngIf="isMobileMenuOpen" (click)="toggleMobileMenu()" class="fixed inset-0 bg-black opacity-50 z-40 md:hidden">
+    </div>
 
     <main class="p-8">
         <router-outlet></router-outlet>

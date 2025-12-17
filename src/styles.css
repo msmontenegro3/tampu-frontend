@@ -24,6 +24,10 @@
         @apply w-full md:w-auto bg-primaryblue rounded-full px-4 py-2 text-white font-medium hover:bg-sky-700 transition-colors duration-200 ease-in-out disabled:opacity-60 disabled:cursor-not-allowed;
     }
 
+    .secondary-btn {
+        @apply w-full md:w-auto rounded-full px-4 py-2 border-2 text-white font-medium hover:bg-white hover:text-primaryblue transition-colors duration-200 ease-in-out disabled:opacity-60 disabled:cursor-not-allowed;
+    }
+
     /* FORMULARIOS */
     .input-shortanswer {
         @apply w-full px-5 py-2 mt-2 border border-gray-200 bg-gray-50 rounded-full focus:ring-2 focus:ring-blue-400 border-b-2 border-b-gray-300;
