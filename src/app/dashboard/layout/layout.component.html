@@ -56,13 +56,22 @@
             </ul>
         </nav>
 
-        <div class="flex flex-col items-center space-y-2 px-3">
-            <button class="secondary-btn px-14" *ngIf="role === 'docente'" routerLink="/dashboard/teacher/create">
-                Crear evento
-            </button>
+        <div class="flex flex-col items-center space-y-8">
 
-            <button class="primary-btn bg-lighterBlue px-14" routerLink="/login" (click)="logout()">Cerrar
-                sesión</button>
+            <div class="space-y-2 flex flex-col items-center">
+                <button class="secondary-btn px-14" *ngIf="role === 'docente'" routerLink="/dashboard/teacher/create">
+                    Crear evento
+                </button>
+
+                <button class="primary-btn bg-lighterBlue px-14" routerLink="/login" (click)="logout()">Cerrar
+                    sesión
+                </button>
+            </div>
+
+
+            <div class="cursor-pointer hover:scale-105 transition-transform" routerLink="/dashboard/home">
+                <img src="assets/img/tampu_white_logo.png" alt="logo tampu">
+            </div>
         </div>
 
     </aside>
