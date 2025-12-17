@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EnrollmentsService } from '../../../../core/enrollments.service';
-import { AttendanceService } from '../../../../core/models/attendance.service';
+import { AttendanceService } from '../../../../core/attendance.service';
 import { EventsService } from '../../../../core/events.service';
 import { CommonModule } from '@angular/common';
 

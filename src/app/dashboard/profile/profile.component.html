@@ -1,1 +1,9 @@
-<p>profile works!</p>
+<h1>Mi perfil</h1>
+
+<div *ngIf="loading">Cargando...</div>
+
+<div *ngIf="user && !loading">
+    <p><strong>Nombre:</strong> {{ user.nombre }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Rol:</strong> {{ user.rol }}</p>
+</div>
