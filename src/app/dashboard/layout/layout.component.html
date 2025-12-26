@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gray-100 flex flex-col md:flex-row">
+<div class="h-screen w-screen bg-gray-100 flex flex-col md:flex-row overflow-hidden">
 
     <div class="bg-primaryblue text-white p-4 shadow flex items-center md:hidden">
         <button (click)="toggleMobileMenu()" class="text-gray-300 hover:text-white focus:outline-none">
@@ -79,8 +79,10 @@
     <div *ngIf="isMobileMenuOpen" (click)="toggleMobileMenu()" class="fixed inset-0 bg-black opacity-50 z-40 md:hidden">
     </div>
 
-    <main class="p-8">
-        <router-outlet></router-outlet>
-    </main>
+    <div class="flex-1 h-full overflow-y-auto bg-gray-100 p-4 md:p-10">
+        <main class="mx-auto max-w-7xl">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
 
 </div>

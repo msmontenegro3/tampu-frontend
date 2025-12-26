@@ -1,36 +1,54 @@
-<h1>Tambos publicados</h1>
+<h1 class="mb-8 text-center">Tambos publicados</h1>
 
-<div *ngIf="loading">
+<div *ngIf="loading" class="py-10 text-center">
     <p>Cargando eventos...</p>
 </div>
 
-<article *ngFor="let e of events">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <article *ngFor="let e of events" class="flex flex-col h-full">
 
-    <!-- Image placeholder -->
-    <!-- <div class="card-img">
-        <img src="" alt="">
-    </div> -->
+        <!-- Image placeholder -->
+        <div class="h-48 w-full">
+            <img class="w-full h-full object-cover" src="assets/img/book_placeholder.png" alt="Imágen del evento">
+        </div>
 
-    <div class="">
-        <p>{{e.date}}</p>
-        <p>{{e.location}}</p>
-        <h2>{{e.title}}</h2>
-        <p>{{e.description}}</p>
+        <div
+            class="h-full bg-white rounded-b-md shadow-lg border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
 
-        <button [routerLink]="['/dashboard/events', e.id]">
-            Ver detalles
-        </button>
-        <button *ngIf="isOwner(e)" [routerLink]="['/dashboard/teacher/edit-event', e.id]">
-            Editar
-        </button>
-        <button *ngIf="isStudent()" [disabled]="isPast(e.date)" (click)="toggleEnrollment(e)">
-            {{ (isEnrolled$(e.id) | async) ? 'Desinscribirme' : 'Inscribirme'}}
-        </button>
-    </div>
+            <div class="p-6 flex-grow flex flex-col">
+                <div class="flex flex-row gap-3">
+                    <p class="text-slate-500"><fa-icon [icon]="dateIcon"></fa-icon> {{e.date}}</p>
+                    <p class="text-slate-500"> <fa-icon [icon]="placeIcon"></fa-icon> {{e.location}}</p>
+                </div>
+                <h2 class="">{{e.title}}</h2>
+                <p class="my-4">{{e.description}}</p>
+            </div>
 
-    <!-- Si no existen tambos -->
-    <div *ngIf="!events">
-        <p>Todavía no se han publicado tambos</p>
-    </div>
+            <div class="px-6 pb-6 pt-0 flex flex-wrap gap-3 mt-auto">
+                <button class="primary-btn flex-1 text-center justify-center"
+                    [routerLink]="['/dashboard/events', e.id]">
+                    Ver detalles
+                </button>
+                <button class="secondary-card-btn flex-1 text-center justify-cente" *ngIf="isOwner(e)"
+                    [routerLink]="['/dashboard/teacher/edit-event', e.id]">
+                    Editar
+                </button>
+                <ng-container *ngIf="{ enrolled: isEnrolled$(e.id) | async } as status">
+                    <button [ngClass]="status.enrolled 
+            ? ' hover:bg-red-600 text-red-600 border-red-500' 
+            : 'secondary-card-btn'" class="secondary-card-btn flex-1 text-center justify-center" *ngIf="isStudent()"
+                        [disabled]="isPast(e.date)" (click)="toggleEnrollment(e)">
+                        {{ status.enrolled ? 'Desinscribirme' : 'Inscribirme'}}
+                    </button>
+                </ng-container>
+            </div>
+        </div>
 
-</article>
+    </article>
+</div>
+
+
+<!-- Si no existen tambos -->
+<div *ngIf="!events">
+    <p>Todavía no se han publicado tambos</p>
+</div>

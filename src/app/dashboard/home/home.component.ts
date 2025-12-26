@@ -6,15 +6,21 @@ import { AuthHelperService } from '../../core/auth-helper.service';
 import { EnrollmentsService } from '../../core/enrollments.service';
 import { EnrollmentStateService } from '../../core/enrollment-state.service';
 import { RouterLink } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCalendar, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FontAwesomeModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
+  /* ICONS */
+  dateIcon = faCalendar;
+  placeIcon = faLocationDot;
+
   events: Event[] = [];
   loading = false;
   error: string | null = null;

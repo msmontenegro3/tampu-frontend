@@ -1,4 +1,4 @@
-<div *ngIf="loading">
+<div *ngIf="loading" class="text-center">
     Cargando evento...
 </div>
 
@@ -8,28 +8,53 @@
 
 <article *ngIf="event">
 
-    <h1>{{event.title}}</h1>
+    <button (click)="goBack()" class="text-2xl text-primaryblue mb-3">
+        <fa-icon [icon]="backIcon"></fa-icon>
+    </button>
 
-    <p> Fecha: {{event.date}} </p>
-    <p> Hora: {{event.time}} </p>
-    <p> Lugar: {{event.location}} </p>
-
-    <p>{{event.description}}</p>
-
-    <p>
-        Docente: {{event.teacher.nombre}} | {{event.teacher.email}}
-    </p>
-
-    <div>
-        <!-- Estudiante -->
-        <button *ngIf="isStudent()" [disabled]="isPast(event.date)" (click)="toggleEnrollment()">
-            {{ (isEnrolled$ | async) ? 'Desinscribirme' : 'Inscribirme'}}
-        </button>
-
-        <!-- Docente -->
-        <button *ngIf="isOwner()" [routerLink]="['/dashboard/teacher/edit-event', event.id]">
-            Editar evento
-        </button>
+    <!-- Image placeholder -->
+    <div class="h-48 w-full">
+        <img class="w-full h-full object-cover" src="assets/img/book_placeholder.png" alt="Imágen del evento">
     </div>
+
+    <div class="flex flex-col items-center">
+
+        <div class="flex-grow flex flex-col pt-3">
+            <div class="flex flex-row gap-3">
+                <p class="text-slate-500"><fa-icon [icon]="dateIcon"></fa-icon> {{event.date}}</p>
+                <p class="text-slate-500"> <fa-icon [icon]="timeIcon"></fa-icon> Hora: {{event.time}} </p>
+                <p class="text-slate-500"> <fa-icon [icon]="placeIcon"></fa-icon> {{event.location}}</p>
+            </div>
+            <h2 class="mt-2">{{event.title}}</h2>
+            <p class="my-4">{{event.description}}</p>
+            <p class="text-sm text-slate-500">
+                <fa-icon [icon]="teacherIcon"></fa-icon> Docente: {{event.teacher.nombre}} | {{event.teacher.email}}
+            </p>
+        </div>
+
+
+
+        <div class="mt-4">
+
+            <ng-container *ngIf="isStudent()">
+                <ng-container *ngIf="{ enrolled: isEnrolled$ | async } as status">
+                    <button
+                        [ngClass]="status.enrolled ? 'hover:bg-red-600 text-red-600 border-red-500' : 'secondary-card-btn'"
+                        class="secondary-card-btn flex-1 text-center justify-center" *ngIf="isStudent()"
+                        [disabled]="isPast(event.date)" (click)="toggleEnrollment()">
+                        {{ status.enrolled ? 'Desinscribirme' : 'Inscribirme'}}
+                    </button>
+                </ng-container>
+            </ng-container>
+
+
+            <!-- Docente -->
+            <button class="secondary-card-btn flex-1 text-center justify-cente" *ngIf="isOwner()"
+                [routerLink]="['/dashboard/teacher/edit-event', event.id]">
+                Editar
+            </button>
+        </div>
+    </div>
+
 
 </article>

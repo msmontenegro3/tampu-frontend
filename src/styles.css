@@ -13,7 +13,16 @@
 
     h1 {
         font-family: "Rem", sans-serif;
-        @apply text-4xl font-bold;
+        @apply text-4xl font-bold text-primaryblue;
+    }
+
+    h2 {
+        font-family: "Rem", sans-serif;
+        @apply text-xl font-bold text-primaryblue;
+    }
+
+    p {
+        @apply text-primaryblue;
     }
 }
 
@@ -26,6 +35,10 @@
 
     .secondary-btn {
         @apply w-full md:w-auto rounded-full px-4 py-2 border-2 text-white font-medium hover:bg-white hover:text-primaryblue transition-colors duration-200 ease-in-out disabled:opacity-60 disabled:cursor-not-allowed;
+    }
+
+    .secondary-card-btn {
+        @apply w-full rounded-full px-4 py-2 border-2 border-primaryblue text-primaryblue font-medium hover:bg-primaryblue hover:text-white transition-colors duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-primaryblue;
     }
 
     /* FORMULARIOS */

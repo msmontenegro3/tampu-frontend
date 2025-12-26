@@ -6,15 +6,21 @@ import { Event } from '../../core/models/event.model';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCalendar, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-my-enrollments',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FontAwesomeModule],
   templateUrl: './my-enrollments.component.html',
   styleUrl: './my-enrollments.component.css',
 })
 export class MyEnrollmentsComponent implements OnInit {
+  /* ÍCONOS FONT AWESOME */
+  dateIcon = faCalendar;
+  placeIcon = faLocationDot;
+
   events: Event[] = [];
   loading = false;
 

@@ -3,19 +3,34 @@ import { Event } from '../../core/models/event.model';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EventsService } from '../../core/events.service';
 import { AuthHelperService } from '../../core/auth-helper.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { EnrollmentsService } from '../../core/enrollments.service';
 import { EnrollmentStateService } from '../../core/enrollment-state.service';
 import { Observable, take } from 'rxjs';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faArrowLeft,
+  faCalendar,
+  faChalkboardTeacher,
+  faClock,
+  faLocationDot,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-event-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FontAwesomeModule],
   templateUrl: './event-detail.component.html',
   styleUrl: './event-detail.component.css',
 })
 export class EventDetailComponent implements OnInit {
+  /* ICONS FONTAWESOME */
+  dateIcon = faCalendar;
+  placeIcon = faLocationDot;
+  backIcon = faArrowLeft;
+  timeIcon = faClock;
+  teacherIcon = faChalkboardTeacher;
+
   event: Event | null = null;
   loading = false;
   error: string | null = null;
@@ -30,7 +45,8 @@ export class EventDetailComponent implements OnInit {
     private eventsService: EventsService,
     private authHelperService: AuthHelperService,
     private enrollmentsService: EnrollmentsService,
-    private enrollmentState: EnrollmentStateService
+    private enrollmentState: EnrollmentStateService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -101,5 +117,9 @@ export class EventDetailComponent implements OnInit {
           });
         }
       });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
