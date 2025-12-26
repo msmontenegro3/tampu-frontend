@@ -4,15 +4,25 @@ import { EventsService } from '../../core/events.service';
 import { AuthHelperService } from '../../core/auth-helper.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import {
+  faArrowLeft,
+  faCalendar,
+  faLocationDot,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-my-events',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FontAwesomeModule],
   templateUrl: './my-events.component.html',
   styleUrl: './my-events.component.css',
 })
 export class MyEventsComponent implements OnInit {
+  /* ICONS */
+  dateIcon = faCalendar;
+  placeIcon = faLocationDot;
+
   events: Event[] = [];
   loading = false;
   error: string | null = null;

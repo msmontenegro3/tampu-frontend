@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -8,15 +8,21 @@ import {
 } from '@angular/forms';
 import { EventsService } from '../../../../core/events.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-edit-event',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './edit-event.component.html',
   styleUrl: './edit-event.component.css',
 })
 export class EditEventComponent implements OnInit {
+  /* ICONS */
+
+  backIcon = faArrowLeft;
+
   form!: FormGroup;
   loading = false;
   error: string | null = null;
@@ -28,7 +34,8 @@ export class EditEventComponent implements OnInit {
     private fb: FormBuilder,
     private eventsService: EventsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -108,5 +115,9 @@ export class EditEventComponent implements OnInit {
         alert('No se pudo eliminar el tambo. Inténtalo de nuevo');
       },
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

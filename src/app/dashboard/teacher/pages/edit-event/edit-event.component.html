@@ -1,29 +1,61 @@
-<h1>Editar tambo</h1>
+<div class="flex flex-col">
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="grid grid-cols-3 items-center mb-6">
+        <button (click)="goBack()" class="flex justify-start text-2xl text-primaryblue mb-3">
+            <fa-icon [icon]="backIcon"></fa-icon>
+        </button>
+        <h1 class="text-center whitespace-nowrap">Editar tambo</h1>
+    </div>
 
-    <label>Título</label>
-    <input type="text" formControlName="title" />
+    <section class="flex flex-col justify-center items-center content-center">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" w-full max-w-md space-y-5">
 
-    <label>Descripción</label>
-    <textarea rows="3" formControlName="description"></textarea>
+            <div>
+                <label>Título
+                    <input type="text" formControlName="title" class="input-shortanswer" />
+                </label>
+            </div>
 
-    <label>Fecha</label>
-    <input type="date" formControlName="date" />
 
-    <label>Hora</label>
-    <input type="time" formControlName="time" />
+            <div>
+                <label>Descripción
+                    <textarea rows="3" formControlName="description" class="input-shortanswer rounded-lg"></textarea>
+                </label>
+            </div>
 
-    <label>Lugar</label>
-    <input type="text" formControlName="location" />
+            <div>
+                <label>Fecha
+                    <input type="date" formControlName="date" class="input-shortanswer" />
+                </label>
+            </div>
 
-    <button type="submit" [disabled]="form.invalid || loading" class="primary-btn block mx-auto">
-        {{ loading ? 'Actualizando...' : 'Actualizar tambo' }}
-    </button>
+            <div>
+                <label>Hora
+                    <input type="time" formControlName="time" class="input-shortanswer" />
+                </label>
+            </div>
 
-    <button type="button" [disabled]="deleting" (click)="onDelete()" class="primary-btn block mx-auto">
-        {{ deleting ? 'Eliminando...' : 'Eliminar tambo' }}
-    </button>
-</form>
+            <div>
+                <label>Lugar
+                    <input type="text" formControlName="location" class="input-shortanswer" />
+                </label>
+            </div>
+
+
+            <div class="flex gap-2 justify-center pt-5">
+                <button type="submit" [disabled]="form.invalid || loading" class="primary-btn">
+                    {{ loading ? 'Actualizando...' : 'Actualizar tambo' }}
+                </button>
+
+                <button type="button" [disabled]="deleting" (click)="onDelete()"
+                    class="secondary-card-btn hover:bg-red-600 text-red-600 border-red-500">
+                    {{ deleting ? 'Eliminando...' : 'Eliminar tambo' }}
+                </button>
+            </div>
+
+        </form>
+    </section>
+
+</div>
 
 <p *ngIf="error" style="color:red">{{ error }}</p>

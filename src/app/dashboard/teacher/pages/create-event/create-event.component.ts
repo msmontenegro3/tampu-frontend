@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -8,15 +8,20 @@ import {
 } from '@angular/forms';
 import { EventsService } from '../../../../core/events.service';
 import { Router } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-create-event',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './create-event.component.html',
   styleUrl: './create-event.component.css',
 })
 export class CreateEventComponent {
+  /* ICONS */
+  backIcon = faArrowLeft;
+
   form!: FormGroup;
   loading = false;
   error: string | null = null;
@@ -24,14 +29,15 @@ export class CreateEventComponent {
   constructor(
     private fb: FormBuilder,
     private eventsService: EventsService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.form = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       date: ['', Validators.required],
       time: ['', Validators.required],
-      location: ['', Validators.required],
+      locationEvent: ['', Validators.required],
     });
   }
 
@@ -52,5 +58,29 @@ export class CreateEventComponent {
         this.loading = false;
       },
     });
+  }
+
+  get title() {
+    return this.form.get('title');
+  }
+
+  get description() {
+    return this.form.get('description');
+  }
+
+  get date() {
+    return this.form.get('date');
+  }
+
+  get time() {
+    return this.form.get('time');
+  }
+
+  get locationEvent() {
+    return this.form.get('locationEvent');
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

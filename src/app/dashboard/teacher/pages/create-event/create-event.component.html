@@ -1,37 +1,84 @@
-<h1>Crear nuevo Tambo</h1>
+<div class="flex flex-col">
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="grid grid-cols-3 items-center mb-6">
+        <button (click)="goBack()" class="flex justify-start text-2xl text-primaryblue mb-3">
+            <fa-icon [icon]="backIcon"></fa-icon>
+        </button>
+        <h1 class="text-center whitespace-nowrap">Crear nuevo Tambo</h1>
+    </div>
 
-    <label>
-        Título
-        <input type="text" formControlName="title">
-    </label>
 
-    <label>
-        Descripción
-        <textarea formControlName="description"></textarea>
-    </label>
+    <section class="flex flex-col justify-center items-center">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full max-w-md space-y-5">
 
-    <label>
-        Fecha
-        <input type="date" formControlName="date">
-    </label>
+            <div>
+                <label>
+                    Título
+                    <input type="text" formControlName="title" class="input-shortanswer">
+                </label>
+                <small class="text-red-600" *ngIf="title?.touched && title?.invalid">
+                    <ng-container *ngIf="title?.errors?.['required']">
+                        Este es un campo obligatorio
+                    </ng-container>
+                </small>
+            </div>
 
-    <label>
-        Hora
-        <input type="time" formControlName="time">
-    </label>
+            <div>
+                <label>
+                    Descripción
+                    <textarea formControlName="description" class="input-shortanswer rounded-lg"></textarea>
+                </label>
+                <small class="text-red-600" *ngIf="description?.touched && description?.invalid">
+                    <ng-container *ngIf="description?.errors?.['required']">
+                        Este es un campo obligatorio
+                    </ng-container>
+                </small>
+            </div>
 
-    <label>
-        Lugar
-        <input type="text" formControlName="location">
-    </label>
+            <div>
+                <label>
+                    Fecha
+                    <input type="date" formControlName="date" class="input-shortanswer">
+                </label>
+                <small class="text-red-600" *ngIf="date?.touched && date?.invalid">
+                    <ng-container *ngIf="date?.errors?.['required']">
+                        Este es un campo obligatorio
+                    </ng-container>
+                </small>
+            </div>
 
-    <button type="submit" [disabled]="form.invalid" class="primary-btn block mx-auto">
-        Publicar tambo
-    </button>
+            <div>
+                <label>
+                    Hora
+                    <input type="time" formControlName="time" class="input-shortanswer">
+                </label>
+                <small class="text-red-600" *ngIf="time?.touched && time?.invalid">
+                    <ng-container *ngIf="time?.errors?.['required']">
+                        Este es un campo obligatorio
+                    </ng-container>
+                </small>
+            </div>
 
-</form>
+            <div>
+                <label>
+                    Lugar
+                    <input type="text" formControlName="locationEvent" class="input-shortanswer">
+                </label>
+                <small class="text-red-600" *ngIf="locationEvent?.touched && locationEvent?.invalid">
+                    <ng-container *ngIf="locationEvent?.errors?.['required']">
+                        Este es un campo obligatorio
+                    </ng-container>
+                </small>
+            </div>
 
-<p *ngIf="loading">Guardando...</p>
-<p *ngIf="error">{{ error }}</p>
+            <button type="submit" [disabled]="form.invalid" class="primary-btn block mx-auto">
+                Publicar tambo
+            </button>
+
+        </form>
+    </section>
+
+
+    <p *ngIf="loading">Guardando...</p>
+    <p *ngIf="error">{{ error }}</p>
+</div>
