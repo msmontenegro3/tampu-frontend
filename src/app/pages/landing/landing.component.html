@@ -1,0 +1,163 @@
+<div class="min-h-screen bg-white text-slate-900">
+    <header class="border-b">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+
+            <div class="cursor-pointer hover:scale-105 transition-transform" routerLink="/">
+                <img src="assets/img/blue_logo.png" alt="logo tampu">
+            </div>
+
+            <nav class="hidden items-center gap-6 md:flex">
+                <a class="text-sm hover:underline" href="#inicio">Inicio</a>
+                <a class="text-sm hover:underline" href="#eventos">Blog</a>
+            </nav>
+
+            <div class="flex items-center gap-2">
+                <a routerLink="/register" class="secondary-card-btn text-sm font-bold text-center">
+                    Registrarme
+                </a>
+                <a routerLink="/login" class="primary-btn text-sm">
+                    Iniciar sesión
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="inicio" class="mx-auto max-w-6xl px-4 py-10 md:py-16">
+        <div class="grid items-center gap-10 md:grid-cols-2">
+            <!-- Image -->
+            <div class="overflow-hidden rounded-2xl border">
+                <img src="assets/img/landing1.png" alt="Tambo de lectura"
+                    class="h-[320px] w-full object-cover md:h-[420px]" />
+            </div>
+
+
+            <!-- Text -->
+            <div class="order-1 md:order-2">
+                <p class="mb-2 text-xs font-semibold tracking-widest text-center">
+                    EVENTOS LITERARIOS
+                </p>
+
+                <h1 class="text-4xl font-extrabold leading-tight md:text-5xl">
+                    Ven a un “tambo de lectura”
+                </h1>
+
+                <p class="mt-4 max-w-prose text-base leading-relaxed text-slate-700">
+                    Es un encuentro literario y comunitario donde nos reunimos para compartir la aventura de un buen
+                    libro. Es un espacio de diálogo abierto, donde las historias se leen en voz alta, se discuten, se
+                    sienten y se convierten en un puente que une a vecinos, amigos y familias.
+                </p>
+
+                <div class="mt-6 flex flex-wrap gap-3">
+                    <a routerLink="/login" class="primary-btn text-sm text-center">
+                        Quiero asistir a un evento
+                    </a>
+                    <a href="#eventos" class="secondary-card-btn text-sm text-center">
+                        Saber más
+                    </a>
+                </div>
+
+                <div class="mt-6 flex items-center gap-3 text-xs text-slate-600">
+                    <span class="rounded-full bg-slate-100 px-3 py-1">Historias</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1">Diversión</span>
+                    <span class="rounded-full bg-slate-100 px-3 py-1">Recompensa</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="eventos" class="bg-slate-50">
+        <div class="mx-auto max-w-6xl px-4 py-12">
+            <div class="mb-8 flex items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold">Eventos literarios</h2>
+                    <p class="mt-1 text-sm text-slate-600">
+                        Actividades para leer, conversar y construir comunidad.
+                    </p>
+                </div>
+
+                <a routerLink="/login" class="hidden primary-btn text-sm md:inline-flex">
+                    Ver eventos
+                </a>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-3">
+                <!-- Card 1 -->
+                <article class="overflow-hidden border bg-white">
+                    <img src="assets/img/landing2.png" alt="Lectura guiada" class="h-44 w-full object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold">Lectura guiada</h3>
+                        <p class="mt-2 text-sm text-slate-600">
+                            Un encuentro para leer en voz alta, comentar y descubrir nuevas
+                            ideas.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="overflow-hidden border bg-white">
+                    <img src="assets/img/landing3.png" alt="Círculo de lectura" class="h-44 w-full object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold">Círculo de lectura</h3>
+                        <p class="mt-2 text-sm text-slate-600">
+                            Conversaciones sencillas y dinámicas para conectar con lo leído.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="overflow-hidden border bg-white">
+                    <img src="assets/img/landing4.png" alt="Lecturas temáticas" class="h-44 w-full object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold">Lecturas temáticas</h3>
+                        <p class="mt-2 text-sm text-slate-600">
+                            Historias y autores para explorar identidad, cultura y comunidad.
+                        </p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="mt-8 md:hidden">
+                <a routerLink="/login" class="primary-btn text-sm">
+                    Ver eventos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="mx-auto max-w-6xl px-4 py-12">
+        <div class="grid gap-8 md:grid-cols-2">
+            <div class="rounded-2xl border p-6">
+                <h3 class="text-xl font-bold">¿Qué es Tampu?</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-700">
+                    Una plataforma que organiza “tambos de lectura” y facilita inscripción,
+                    control de asistencia y seguimiento del avance.
+                </p>
+            </div>
+
+            <div class="rounded-2xl border p-6">
+                <h3 class="text-xl font-bold">Pensado para educación</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-700">
+                    Docentes gestionan eventos; estudiantes se inscriben y el sistema
+                    registra participación como base para gamificación.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-primaryblue">
+        <div class="mx-auto items-center flex max-w-6xl flex-col gap-4 px-4 py-8 md:flex-row md:justify-between">
+            <div class="cursor-pointer hover:scale-105 transition-transform" routerLink="/">
+                <img src="assets/img/tampu_white_logo.png" alt="logo tampu">
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a class="text-sm text-white hover:underline" href="#">Facebook</a>
+                <a class="text-sm text-white hover:underline" href="#">X</a>
+                <a class="text-sm text-white hover:underline" href="#">Instagram</a>
+            </div>
+        </div>
+    </footer>
+</div>

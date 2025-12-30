@@ -7,6 +7,7 @@ import { MyEventsComponent } from './my-events/my-events.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MyEnrollmentsComponent } from './my-enrollments/my-enrollments.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
+import { MedalsComponent } from './medals/medals.component';
 
 export const DASHBOARD_ROUTES: Routes = [
   {
@@ -19,6 +20,7 @@ export const DASHBOARD_ROUTES: Routes = [
       { path: 'my-enrollments', component: MyEnrollmentsComponent },
       { path: 'attendance', component: AttendanceComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'progress', component: MedalsComponent },
       { path: 'events/:id', component: EventDetailComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
