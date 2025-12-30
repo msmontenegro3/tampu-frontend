@@ -3,17 +3,23 @@ import { ActivatedRoute } from '@angular/router';
 import { EnrollmentsService } from '../../../../core/enrollments.service';
 import { AttendanceService } from '../../../../core/attendance.service';
 import { EventsService } from '../../../../core/events.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-event-attendance',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './event-attendance.component.html',
   styleUrl: './event-attendance.component.css',
 })
 export class EventAttendanceComponent implements OnInit {
+  /* ICONOS */
+  backIcon = faArrowLeft;
+
   eventId!: string;
+  eventName!: string;
   students: any[] = [];
   attendanceMap = new Set<string>();
   loading = false;
@@ -22,12 +28,25 @@ export class EventAttendanceComponent implements OnInit {
     private route: ActivatedRoute,
     private enrollmentsService: EnrollmentsService,
     private attendanceService: AttendanceService,
-    private eventsService: EventsService
+    private eventsService: EventsService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
     this.eventId = this.route.snapshot.paramMap.get('id')!;
+    this.loadEventData();
     this.loadStudents();
+  }
+
+  loadEventData() {
+    this.eventsService.getEventById(this.eventId).subscribe({
+      next: (event) => {
+        this.eventName = event.title;
+      },
+      error: () => {
+        this.eventName = 'Evento no encontrado';
+      },
+    });
   }
 
   loadStudents() {
@@ -73,5 +92,9 @@ export class EventAttendanceComponent implements OnInit {
         next: () => this.attendanceMap.add(key),
       });
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

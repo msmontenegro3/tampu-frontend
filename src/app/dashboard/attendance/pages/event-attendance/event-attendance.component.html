@@ -1,20 +1,39 @@
-<h1>Registrar asistencia</h1>
+<div class="grid grid-cols-3 items-center mb-6">
+    <button (click)="goBack()" class="flex justify-start text-2xl text-primaryblue mb-3">
+        <fa-icon [icon]="backIcon"></fa-icon>
+    </button>
+    <h1 class="text-center lg:whitespace-nowrap">Asistencia: {{eventName}}</h1>
+</div>
 
-<table *ngIf="students.length > 0">
-    <tr>
-        <th>Estudiante</th>
-        <th>Asistencia</th>
-    </tr>
+<div *ngIf="students.length > 0"
+    class="max-w-3xl mx-auto bg-white rounded-md shadow-sm border border-gray-100 overflow-hidden">
 
-    <tr *ngFor="let s of students">
-        <td>
-            <input type="checkbox" [checked]="isPresent(s.id)" (change)="toggle(s.id)" />
-        </td>
+    <table class="w-full border-collapse">
+        <thead>
+            <tr class="bg-gray-50/50">
+                <th class="p-4 w-16 text-center border-b border-gray-100"></th>
+                <th class="p-4 text-sm font-semibold  border-b border-gray-100">Nombre</th>
+                <th class="p-4 text-sm font-semibold border-b border-gray-100">Email</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+            <tr *ngFor="let s of students" class="hover:bg-gray-50/80 transition-all">
+                <td class="p-4 text-center">
+                    <input type="checkbox" [checked]="isPresent(s.id)" (change)="toggle(s.id)"
+                        class="w-4 h-4 rounded border-gray-300 text-[#021859] focus:ring-[#021859] cursor-pointer" />
+                </td>
+                <td class="p-4 text-sm text-gray-800 font-medium">
+                    {{ s.nombre }}
+                </td>
+                <td class="p-4 text-sm text-gray-400">
+                    {{ s.email || (s.nombre.toLowerCase().replace(' ', '') + '@mail.com') }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-        <td>{{ s.nombre }}</td>
-    </tr>
-</table>
 
-<div *ngIf="students.length === 0 && !loading">
+<div *ngIf="students.length === 0 && !loading" class="text-center">
     No hay estudiantes inscritos.
 </div>

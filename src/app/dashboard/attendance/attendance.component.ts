@@ -4,15 +4,21 @@ import { EventsService } from '../../core/events.service';
 import { Router } from '@angular/router';
 import { AuthHelperService } from '../../core/auth-helper.service';
 import { CommonModule } from '@angular/common';
+import { faCalendar, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-attendance',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './attendance.component.html',
   styleUrl: './attendance.component.css',
 })
 export class AttendanceComponent implements OnInit {
+  /* ICONS */
+  dateIcon = faCalendar;
+  placeIcon = faLocationDot;
+
   events: Event[] = [];
   loading = false;
   error: string | null = null;

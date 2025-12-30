@@ -1,4 +1,4 @@
-<h1>Registro de asistencia</h1>
+<h1 class="mb-6 text-center">Registro de asistencia</h1>
 
 <div *ngIf="loading">Cargando eventos...</div>
 
@@ -6,12 +6,30 @@
     <p>No tienes tambos creados.</p>
 </div>
 
-<section *ngFor="let e of events">
-    <h2>{{ e.title }}</h2>
-    <p> {{ e.date }} - {{ e.time }} </p>
-    <p> {{ e.description }} </p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <section *ngFor="let e of events" class="flex flex-col h-full">
 
-    <button (click)="goToEvent(e.id)">
-        Registrar asistencia
-    </button>
-</section>
+        <!-- Image placeholder -->
+        <div class="h-48 w-full">
+            <img class="w-full h-full object-cover" src="assets/img/book_placeholder.png" alt="Imágen del evento">
+        </div>
+        <div
+            class="h-full bg-white rounded-b-md shadow-lg border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
+            <div class="p-6 flex-grow flex flex-col">
+                <div class="flex flex-row gap-3">
+                    <p class="text-slate-500"><fa-icon [icon]="dateIcon"></fa-icon> {{e.date}}</p>
+                    <p class="text-slate-500"> <fa-icon [icon]="placeIcon"></fa-icon> {{e.location}}</p>
+                </div>
+                <h2 class="">{{e.title}}</h2>
+                <p class="my-4">{{e.description}}</p>
+            </div>
+
+            <div class="px-6 pb-6 pt-0 flex flex-wrap items-center justify-center">
+                <button (click)="goToEvent(e.id)" class="primary-btn">
+                    Registrar asistencia
+                </button>
+            </div>
+        </div>
+
+    </section>
+</div>
