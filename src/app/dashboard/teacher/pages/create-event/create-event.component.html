@@ -62,10 +62,10 @@
             <div>
                 <label>
                     Lugar
-                    <input type="text" formControlName="locationEvent" class="input-shortanswer">
+                    <input type="text" formControlName="location" class="input-shortanswer">
                 </label>
-                <small class="text-red-600" *ngIf="locationEvent?.touched && locationEvent?.invalid">
-                    <ng-container *ngIf="locationEvent?.errors?.['required']">
+                <small class="text-red-600" *ngIf="location?.touched && location?.invalid">
+                    <ng-container *ngIf="location?.errors?.['required']">
                         Este es un campo obligatorio
                     </ng-container>
                 </small>

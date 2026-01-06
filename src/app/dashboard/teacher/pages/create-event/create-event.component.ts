@@ -30,14 +30,14 @@ export class CreateEventComponent {
     private fb: FormBuilder,
     private eventsService: EventsService,
     private router: Router,
-    private location: Location
+    private locations: Location
   ) {
     this.form = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       date: ['', Validators.required],
       time: ['', Validators.required],
-      locationEvent: ['', Validators.required],
+      location: ['', Validators.required],
     });
   }
 
@@ -76,11 +76,11 @@ export class CreateEventComponent {
     return this.form.get('time');
   }
 
-  get locationEvent() {
-    return this.form.get('locationEvent');
+  get location() {
+    return this.form.get('location');
   }
 
   goBack(): void {
-    this.location.back();
+    this.locations.back();
   }
 }
